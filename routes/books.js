@@ -54,15 +54,12 @@ router.post('/', async (req, res) => {
 // Show Book Route
 router.get('/:id', async (req, res) => {
   try {
-    const book = await Book.findById(req.params.id)
-                           .populate('author')
-                           .exec()
+    const book = await Book.findById(req.params.id).populate('author').exec()
     res.render('books/show', { book: book })
   } catch {
     res.redirect('/')
   }
 })
-
 // Edit Book Route
 router.get('/:id/edit', async (req, res) => {
   try {
@@ -72,11 +69,9 @@ router.get('/:id/edit', async (req, res) => {
     res.redirect('/')
   }
 })
-
 // Update Book Route
 router.put('/:id', async (req, res) => {
-  let book
-
+  let book 
   try {
     book = await Book.findById(req.params.id)
     book.title = req.body.title
